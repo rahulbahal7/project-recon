@@ -1,0 +1,236 @@
+README
+Project 6 - Project Recon
+Rahul Bahal (001721593)
+
+-------------------------------------------------------------------------------
+Usage:
+The script should be executed as follows for a single log file:
+./grepForStuff.sh <name_of_log_file>
+OR
+To execute the script for multiple log files in a directory structure:
+./grepForStuff.sh bro-logs/*/*/*
+
+-------------------------------------------------------------------------------
+Scripts:
+1. grepForStuff.sh
+This script contains the grep statements to search and identify the PII that 
+was leaked by the app. The script has been written to look for the following 
+information:
+Device Information: OS, Version, Build, IMEI, MAC, Advertiser ID
+Personal Information: Name, sex, username, password, email, address, city, Device
+Location, Zip Code.
+
+2. fetch_url.py
+This python scripts parses the log file to retrieve the host names or sites that 
+were contacted by the App and also maintains a count for each host. In the end,
+the script prints all the unique sites that were contacted by the App.
+
+-------------------------------------------------------------------------------
+Analysis:
+
+I. Personally Identifiable Information(PII):
+The following PII was observed in the Apps:
+a) Zillow - GPS location, password and Advetiser ID, Current City
+b) Tumblr - Username, Password
+c) Southwest Airlines - Username, Passowrd, Gender, Current City
+d) Badoo - Advertiser ID, IMEI
+e) United Airlines - GPS Location, password, first name, last name, current city
+
+Apart from above information, all the apps leaked the Operating System, OS version
+number and OS build number.
+The sharing of the information like username, password, name, coordinates, city,
+sex and imei number in plain text over the network is just eye opening. This kind
+of information sharing raises a lot of questions regarding the security and
+integrity of these apps. On top of that, it also raises an ethical dilemma as how 
+can these apps treat the personal information the way they are doing by asking 
+for a innocent "I agree" during installation and I strongly have the opinion now that
+our information should be transferred with a lot more security by these apps.
+
+----------------------------------------
+II. List of Sites Contacted:
+An interesting observation from the list of the sites contacted by Zillow is that
+it is contacting a lot of domains(some of which are unfamiliar from a first look and
+it's hard to say what they would be doing).
+Another interesting observation is how United Airlines and Southwest are contacting
+some domains that are purely related to advertising which shows that their intent
+is to make as much money and profit without caring that much about the privacy of the
+user's information.
+
+Below is the detailed list of the sites contacted by each of the apps tested.
+
+1. Zillow
+a) App
+i) HTTP
+bluecava
+googleadservices
+bing
+msn
+virtualearth
+bizographics
+doubleclick
+zillowstatic
+igodigital
+tapad
+scorecardresearch
+zillow
+
+ii) HTTPS
+google
+moatads
+linkedin
+crashlytics
+twitter
+adnxs
+splkmobile
+adjust
+bizographics
+2mdn
+doubleclick
+dmtry
+urbanairship
+igodigital
+soundcloud
+zillow
+
+b) Chrome
+i) HTTP
+zillowcloud
+bizographics
+adsrvr
+bluecava
+googleadservices
+samba
+fiksu
+w55c
+quantserve
+msn
+doubleclick
+truste
+iperceptions
+yieldmanager
+virtualearth
+igodigital
+zillowstatic
+bkrtx
+scorecardresearch
+zillow
+bing
+mathtag
+bluekai
+abmr
+tapad
+
+ii) HTTPS
+zillow
+gwallet
+googleadservices
+iasds01
+twitter
+zillowcloud
+adnxs
+linkedin
+yahoo
+turn
+amazon-adsystem
+samba
+advertising
+doubleclick
+zillowstatic
+igodigital
+tribalfusion
+scorecardresearch
+bizographics
+
+--------------------
+2) United Airlines
+a) App
+i) HTTPS
+google
+unitedwifi
+continental
+united
+ensighten
+google-analytics
+
+b) Chrome
+i) HTTP
+united
+j2inter
+
+ii) HTTPS
+united
+yieldoptimizer
+google
+doubleclick
+ensighten
+google-analytics
+
+--------------------
+3) Tumblr
+a) App
+i) HTTPS
+tumblr
+google
+vine
+
+b) Chrome
+i) HTTP
+tumblr
+
+ii) HTTPS
+cedexis-radar
+google
+cedexis-test
+cedexis
+cloudfront
+tumblr
+txmblr
+staticflickr
+scorecardresearch
+
+-------------------
+4) Southwest
+a) App
+i) HTTPS
+google
+southwest
+
+b) Chrome
+i) HTTP
+southwest
+
+ii) HTTPS
+google
+xg4ken
+googleapis
+tubemogul
+tidaltv
+atwola
+advertising
+doubleclick
+demdex
+tapad
+southwest
+
+-------------------
+5) Badoo
+a) App
+i) HTTP
+badoocdn
+
+ii) HTTPS
+crashlytics
+google
+badoo
+soundcloud
+appsflyer
+
+b) Chrome
+i) HTTP
+badoo
+
+ii) HTTPS
+badoocdn
+google
+badoo
+-------------------------------------------------------------------------------
